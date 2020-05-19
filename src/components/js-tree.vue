@@ -109,7 +109,9 @@ export default {
     emitChange() {
       this.$emit("change", this.selectedItems);
     },
-    itemDragStart() {
+    itemDragStart(node, item, e) {
+      e.dataTransfer.setData("application/my-app", JSON.stringify(item));
+      // console.log('e.target.id', item, e.target.id);
       // node, item, e
       //console.log('itemDragStart');
     },

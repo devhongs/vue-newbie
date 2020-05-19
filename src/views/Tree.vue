@@ -85,7 +85,7 @@ export default {
       };
       params.api.addRowDropZone(dropZone);
     },
-    dragStarted() {
+    dragStarted(event) {
       console.log("----------- dragStarted");
     },
     gridDragOver(event) {
@@ -106,6 +106,12 @@ export default {
     // 22333
     drop(event) {
       console.log("drop", event);
+      event.preventDefault();
+      // 대상의 id를 가져와 이동한 대상 DOM 요소를 추가합니다.
+      // Get the id of the target and add the moved element to the target's DOM
+      const data = event.dataTransfer.getData("application/my-app");
+      const item = JSON.parse(data);
+      console.log("event.getdata", item);
     }
   },
   beforeMount() {
