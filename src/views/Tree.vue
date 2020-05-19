@@ -15,7 +15,7 @@
           </div>
         </b-col>
         <b-col>
-          <div @dragover.prevent>
+          <div @dragover.prevent @drop="drop">
             <h3>Tree Result</h3>
             <ag-grid-vue
               id="aggrid"
@@ -31,43 +31,12 @@
                 headerName="Dept Code"
                 :rowDrag="true"
                 :width="120"
-                suppressSorting
               >
               </ag-grid-column>
               <ag-grid-column
                 field="nm"
                 headerName="Dept Name"
-                :width="120"
-                suppressSorting
-              >
-              </ag-grid-column>
-            </ag-grid-vue>
-          </div>
-        </b-col>
-        <b-col>
-          <div>
-            <h3>Tree Result</h3>
-            <ag-grid-vue
-                    id="aggrid2"
-                    style="width: 100%; height: 500px;"
-                    class="ag-theme-alpine"
-                    :columnDefs="columnDefs"
-                    :rowData="rowData"
-                    @grid-ready="gridReady"
-                    @drag-started="dragStarted"
-            >
-              <ag-grid-column
-                      field="cd"
-                      headerName="Dept Code"
-                      :width="120"
-                      suppressSorting
-              >
-              </ag-grid-column>
-              <ag-grid-column
-                      field="nm"
-                      headerName="Dept Name"
-                      :width="120"
-                      suppressSorting
+                :width="100"
               >
               </ag-grid-column>
             </ag-grid-vue>
@@ -104,7 +73,7 @@ export default {
     },
     addGridDropZone(params) {
       var grid = document.querySelector("#aggrid2");
-      console.log('addGridDropZone', grid);
+      console.log("addGridDropZone", grid);
       var dropZone = {
         getContainer: function() {
           return grid;
@@ -133,6 +102,10 @@ export default {
     treeChangeHandler(items) {
       console.log(items);
       this.rowData = items;
+    },
+    // 22333
+    drop(event) {
+      console.log("drop", event);
     }
   },
   beforeMount() {

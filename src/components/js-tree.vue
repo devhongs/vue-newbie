@@ -24,7 +24,7 @@
     </b-row>
     <b-row>
       <b-col>
-        <h3>Drop Zone</h3>
+        <h5>Drop Zone</h5>
         <button draggable="true" class="draggable">Drag this...</button>
         <div @dragover.prevent @drop="drop" style="background: beige; height: 200px"></div>
       </b-col>
@@ -111,19 +111,19 @@ export default {
     },
     itemDragStart() {
       // node, item, e
-      console.log('itemDragStart');
+      //console.log('itemDragStart');
     },
     itemDragEnd() {
       // node, item, e22222sssssss
-      console.log('itemDragEnd');
+      //console.log('itemDragEnd');
     },
     itemDropBefore() {
       // node, item, draggedItem, e
-      console.log('itemDropBefore')
+      //console.log('itemDropBefore')
     },
     itemDrop() {
       // node, item, draggedItem, e
-      console.log('itemDrop')
+      //console.log('itemDrop')
     },
     drop(a,b) {
       // console.log('dropzone droped',a,b);
