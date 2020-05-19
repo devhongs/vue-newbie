@@ -1,0 +1,24 @@
+@import "~bootstrap/scss/bootstrap";
+@import "~bootstrap-vue/src/index.scss";
+
+body {
+  padding: 0px;
+  margin: 0px;
+}
+
+a {
+  color: whitesmoke;
+}
+
+.main-title {
+  background: cornflowerblue;
+}
+
+.header-container {
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.main-container {
+  padding-top: 15px;
+}
