@@ -91,7 +91,7 @@ export default {
       // console.log(node.model.text + " itemClick !", this.getSelectedItems());
     },
     itemToggle(node) {
-      console.log(node.model.text + " itemToggle !");
+      //console.log(node.model.text + " itemToggle !");
     },
     collapse() {
       console.log("js-tree :: collapse", this.tree);

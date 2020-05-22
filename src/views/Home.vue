@@ -12,6 +12,10 @@
     name: "Home",
     components: {
       LocalComponent
+    },
+    mounted() {
+      console.log('----------------------------------- home');
+      console.log(this)
     }
   };
 </script>

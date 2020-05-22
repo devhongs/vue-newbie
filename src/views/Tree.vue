@@ -21,10 +21,10 @@
               id="aggrid"
               style="width: 100%; height: 500px;"
               class="ag-theme-alpine"
+              :gridOptions="gridOptions"
               :columnDefs="columnDefs"
               :rowData="rowData"
               @grid-ready="gridReady"
-              @drag-started="dragStarted"
             >
               <ag-grid-column
                 field="cd"
@@ -62,35 +62,12 @@ export default {
       list: data,
       treeInstance: {},
       treeSelectedItems: [],
+      gridOptions: null,
       columnDefs: null,
       rowData: null
     };
   },
   methods: {
-    gridReady(params) {
-      // console.log("----------- gridReady", params);
-      // this.addGridDropZone(params);
-    },
-    addGridDropZone(params) {
-      var grid = document.querySelector("#aggrid2");
-      console.log("addGridDropZone", grid);
-      var dropZone = {
-        getContainer: function() {
-          return grid;
-        },
-        onDragStop: function(params) {
-          console.log("onDragStop", params);
-          // addRecordToGrid(side.toLowerCase(), params.node.data);
-        }
-      };
-      params.api.addRowDropZone(dropZone);
-    },
-    dragStarted(event) {
-      console.log("----------- dragStarted");
-    },
-    gridDragOver(event) {
-      console.log("----------- gridDragOver", event);
-    },
     collapseHandler() {
       this.treeInstance.collapse();
       console.log("collapseHandler", this.treeInstance);
@@ -100,7 +77,7 @@ export default {
       console.log("getSelectedItemsHandler", items);
     },
     treeChangeHandler(items) {
-      console.log(items);
+      //console.log(items);
       this.rowData = items;
     },
     // 22333
@@ -111,11 +88,27 @@ export default {
       // Get the id of the target and add the moved element to the target's DOM
       const data = event.dataTransfer.getData("application/my-app");
       const item = JSON.parse(data);
-      console.log("event.getdata", item);
+      this.addRowData(item);
+      console.log("event.getdata", item, this.gridOptions);
+    },
+    //
+    // Grid
+    //
+    gridReady(params) {
+      // console.log("----------- gridReady", params);
+      // this.addGridDropZone(params);
+    },
+    addRowData(item) {
+      const api = this.gridOptions.api;
+      const transaction = {
+        add: [item]
+      };
+      api.applyTransaction(transaction);
     }
   },
   beforeMount() {
     this.rowData = [];
+    this.gridOptions = {};
   },
   mounted() {
     this.treeInstance = this.$refs.treeInstance;
