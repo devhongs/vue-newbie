@@ -15,6 +15,7 @@
     "bootstrap": "^4.5.0",
     "bootstrap-vue": "^2.14.0",
     "core-js": "^3.6.4",
+    "liquor-tree": "^0.2.70",
     "lodash": "^4.17.15",
     "vue": "^2.6.11",
     "vue-jstree": "^2.1.6",

@@ -20,25 +20,12 @@
             <ag-grid-vue
               id="aggrid"
               style="width: 100%; height: 500px;"
-              class="ag-theme-alpine"
+              class="ag-theme-alpine-dark"
               :gridOptions="gridOptions"
               :columnDefs="columnDefs"
               :rowData="rowData"
               @grid-ready="gridReady"
             >
-              <ag-grid-column
-                field="cd"
-                headerName="Dept Code"
-                :rowDrag="true"
-                :width="120"
-              >
-              </ag-grid-column>
-              <ag-grid-column
-                field="nm"
-                headerName="Dept Name"
-                :width="100"
-              >
-              </ag-grid-column>
             </ag-grid-vue>
           </div>
         </b-col>
@@ -57,20 +44,25 @@ export default {
     AgGridVue
   },
   data: () => {
-    const data = {};
     return {
-      list: data,
+      list: {},
       treeInstance: {},
       treeSelectedItems: [],
       gridOptions: null,
-      columnDefs: null,
-      rowData: null
+      columnDefs: [
+        { headerName: '사용자 ID', field: 'userNo', width: 150 },
+        { headerName: '이름', field: 'userName', width: 150 },
+        { headerName: '부서', field: 'groupName', width: 150 },
+      ],
+      rowData: null,
     };
   },
   methods: {
     collapseHandler() {
-      this.treeInstance.collapse();
-      console.log("collapseHandler", this.treeInstance);
+      this.treeInstance.initData();
+      // this.treeInstance.collapse();
+      // console.log("collapseHandler", this.treeInstance);
+      // this.treeData = this.getData();
     },
     getSelectedItemsHandler() {
       const items = this.treeInstance.getSelectedItems();
@@ -78,7 +70,7 @@ export default {
     },
     treeChangeHandler(items) {
       //console.log(items);
-      this.rowData = items;
+      // this.rowData = items;
     },
     // 22333
     drop(event) {
@@ -104,6 +96,39 @@ export default {
         add: [item]
       };
       api.applyTransaction(transaction);
+    },
+    getData() {
+      return [
+        {
+          text: "Dept A",
+          cd: "A_cd",
+          nm: "A_name",
+          children: [
+            {
+              text: "Dept A1",
+              cd: "A1_cd",
+              nm: "A1_name"
+            }
+          ]
+        },
+        {
+          text: "Dept B",
+          cd: "B_cd",
+          nm: "B_name",
+          children: [
+            {
+              text: "Dept B1",
+              cd: "B1_cd",
+              nm: "B1_name"
+            },
+            {
+              text: "Dept B2",
+              cd: "B2_cd",
+              nm: "B2_name"
+            }
+          ]
+        }
+      ];
     }
   },
   beforeMount() {
@@ -111,11 +136,11 @@ export default {
     this.gridOptions = {};
   },
   mounted() {
-    this.treeInstance = this.$refs.treeInstance;
+    this.treeInstance = this.$refs.treeInstance
     // console.log("mounted...");
     // collapseHandler: () => {
     //   console.log('collapseHandler');
     // }
-  }
+  },
 };
 </script>
